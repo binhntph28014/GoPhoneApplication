@@ -1,11 +1,12 @@
-package binhntph28014.fpoly.gophoneapplication.fragment.api;
+package binhntph28014.fpoly.gophoneapplication.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
-import binhntph28014.fpoly.gophoneapplication.fragment.model.response.LoginResponse;
-import binhntph28014.fpoly.gophoneapplication.fragment.model.response.ServerResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.DetailUserReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,17 +21,7 @@ import retrofit2.http.Path;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
-    // 10.0.2.2
-    // 10.0.3.2
-    // 172.20.10.3
-    // 192.168.0.106
-//    String LOCALHOT = "103.166.183.57"; // đc cho socket
-//    192.168.100.4
-    // 192.168.1.109
-    //String LOCALHOT = "192.168.1.159"; // đc cho socket
-
-
-       String LOCALHOT = "192.168.42.106"; // đc cho socket
+    String LOCALHOT = "192.168.1.5"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT + ":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -67,6 +58,10 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
+
+    @GET("user/detail-profile/{idUser}")
+    Call<DetailUserReponse> detailProfile(@Header("Authorization") String authorization,
+                                          @Path("idUser") String idUser);
 
 
 }

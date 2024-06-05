@@ -6,7 +6,8 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import quyenvvph20946.fpl.geoteachapplication.databinding.ActivityResetPassSuccessBinding;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivityResetPassSuccessBinding;
+
 
 public class ResetPassSuccess extends AppCompatActivity {
     ImageView backResetSuccess;

@@ -1,4 +1,4 @@
-package binhntph28014.fpoly.gophoneapplication.fragment.model;
+package binhntph28014.fpoly.gophoneapplication.model;
 
 import com.google.gson.annotations.SerializedName;
 

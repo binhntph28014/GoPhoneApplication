@@ -6,7 +6,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import quyenvvph20946.fpl.geoteachapplication.databinding.ActivityRegisterSuccessBinding;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivityRegisterSuccessBinding;
+
 
 public class RegisterSuccess extends AppCompatActivity {
     private ActivityRegisterSuccessBinding binding;

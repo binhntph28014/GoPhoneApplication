@@ -1,4 +1,4 @@
-package binhntph28014.fpoly.gophoneapplication.fragment.model.response;
+package binhntph28014.fpoly.gophoneapplication.model.response;
 
 public class LoginResponse {
     private int code;

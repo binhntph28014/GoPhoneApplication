@@ -13,7 +13,13 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import binhntph28014.fpoly.gophoneapplication.untill.ProgressLoadingDialog;
+import binhntph28014.fpoly.gophoneapplication.R;
+import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivityForgotPassBinding;
+import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
 
+import binhntph28014.fpoly.gophoneapplication.untill.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,6 +27,8 @@ import retrofit2.Response;
 public class ForgotPass extends AppCompatActivity {
     private ActivityForgotPassBinding binding;
     private ProgressLoadingDialog loadingDialog;
+    private static final String TAG = ForgotPass.class.getSimpleName();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +44,7 @@ public class ForgotPass extends AppCompatActivity {
         binding.btnVerifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email  =binding.edtEmail.getText().toString().trim();
+                String email = binding.edtEmail.getText().toString().trim();
                 registerAccount(email);
             }
         });
@@ -44,21 +52,21 @@ public class ForgotPass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-                overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
             }
         });
     }
+
     private void registerAccount(String email) {
-        if(checkEmail(email)) {
+        if (checkEmail(email)) {
             loadingDialog.show();
             BaseApi.API.forgotPassword(email).enqueue(new Callback<ServerResponse>() {
                 @Override
                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                    if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    if (response.isSuccessful()) { // chỉ nhận đầu status 200
                         ServerResponse serverResponse = response.body();
-                        Log.d(TAG.toString, "onResponse-forgotPassword: " + serverResponse.toString());
-                        serverResponse.getCode();
-                        if(serverResponse.getCode() == 200) {
+                        Log.d(TAG, "onResponse-forgotPassword: " + serverResponse.toString());
+                        if (serverResponse.getCode() == 200) {
                             Toast.makeText(getApplicationContext(), serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } else { // nhận các đầu status #200
@@ -66,12 +74,10 @@ public class ForgotPass extends AppCompatActivity {
                             String errorBody = response.errorBody().string();
                             JSONObject errorJson = new JSONObject(errorBody);
                             String errorMessage = errorJson.getString("message");
-                            Log.d(TAG.toString, "onResponse-forgotPassword: " + errorMessage);
+                            Log.d(TAG, "onResponse-forgotPassword: " + errorMessage);
                             Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                        }catch (IOException e){
+                        } catch (IOException | JSONException e) {
                             e.printStackTrace();
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
                         }
                     }
                     loadingDialog.dismiss();
@@ -80,15 +86,16 @@ public class ForgotPass extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<ServerResponse> call, Throwable t) {
                     Toast.makeText(ForgotPass.this, t.toString(), Toast.LENGTH_SHORT).show();
-                    Log.d(TAG.toString, "onFailure-forgotPassword: " + t.toString());
+                    Log.d(TAG, "onFailure-forgotPassword: " + t.toString());
                     loadingDialog.dismiss();
                 }
             });
         }
     }
+
     private boolean checkEmail(String email) {
         setTextUI();
-        if(!Validator.isValidEmail(email)) {
+        if (!Validator.isValidEmail(email)) {
             binding.tvErrorEmail.setText("Không đúng định dạng email!");
             binding.lineEmail.setVisibility(View.GONE);
             binding.tvErrorEmail.setVisibility(View.VISIBLE);
@@ -96,6 +103,7 @@ public class ForgotPass extends AppCompatActivity {
         }
         return true;
     }
+
     private void setTextUI() {
         binding.tvErrorEmail.setText("");
         binding.lineEmail.setVisibility(View.VISIBLE);

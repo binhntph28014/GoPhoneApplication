@@ -1,21 +1,21 @@
 package binhntph28014.fpoly.gophoneapplication.model.response;
 
-public class ServerResponse {
+
+import binhntph28014.fpoly.gophoneapplication.model.User;
+
+public class DetailUserReponse {
     private int code;
+    private User data;
     private String message;
 
-    public ServerResponse() {
-    }
-
-    public ServerResponse(int code, String message) {
-        this.code = code;
-        this.message = message;
+    public DetailUserReponse() {
     }
 
     @Override
     public String toString() {
-        return "Response{" +
+        return "DetailUserReponse{" +
                 "code=" + code +
+                ", data=" + data +
                 ", message='" + message + '\'' +
                 '}';
     }
@@ -26,6 +26,14 @@ public class ServerResponse {
 
     public void setCode(int code) {
         this.code = code;
+    }
+
+    public User getData() {
+        return data;
+    }
+
+    public void setData(User data) {
+        this.data = data;
     }
 
     public String getMessage() {

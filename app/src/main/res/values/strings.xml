@@ -3,4 +3,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="phone_image_description">Ảnh điện thoại</string>
+    <string name="channe">channe</string>
+    <string name="parameter_text">%s</string>
+    <string name="web_client_id">107421999820-v65vr2n2hkd2of5lfovnvn9md2ouvg17.apps.googleusercontent.com</string>
+    <string name="android_client_id">107421999820-pi6mk0sgi4r4cpbph6de4b621qtfuik9.apps.googleusercontent.com</string>
+    <string name="title_logout">Bạn có muốn đăng xuất khỏi ứng dụng ?</string>
+    <string name="navigation_open">navigation_open</string>
+    <string name="navigation_close">navigation_close</string>
 </resources>

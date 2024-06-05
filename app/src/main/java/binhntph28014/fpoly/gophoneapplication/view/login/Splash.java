@@ -7,7 +7,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import quyenvvph20946.fpl.geoteachapplication.databinding.ActivitySplashBinding;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivitySplashBinding;
+
 
 public class Splash extends AppCompatActivity {
     private ActivitySplashBinding binding;
