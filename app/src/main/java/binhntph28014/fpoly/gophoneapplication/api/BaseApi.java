@@ -3,8 +3,9 @@ package binhntph28014.fpoly.gophoneapplication.fragment.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
-import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
+
+import binhntph28014.fpoly.gophoneapplication.fragment.model.response.LoginResponse;
+import binhntph28014.fpoly.gophoneapplication.fragment.model.response.ServerResponse;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
