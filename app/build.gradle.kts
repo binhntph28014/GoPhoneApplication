@@ -37,6 +37,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
     //zalo
     implementation("commons-codec:commons-codec:1.14")
+
+        implementation ("com.airbnb.android:lottie:5.0.3")
+
+
 }
