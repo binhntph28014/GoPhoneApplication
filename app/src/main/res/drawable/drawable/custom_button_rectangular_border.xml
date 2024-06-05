@@ -2,18 +2,17 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape>
-<<<<<<< HEAD
-
-=======
-            <solid android:color="@color/white"/>
->>>>>>> origin/Nhuong
-            <corners android:radius="7dp"/>
+            <solid android:color="#0CC0DF" />
+            <stroke android:dashGap="10dp"/>
+            <corners android:radius="5dp"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/gray69"/>
-            <corners android:radius="7dp"/>
+            <solid android:color="#6CC1CF" />
+            <stroke android:dashGap="10dp"/>
+            <corners android:radius="5dp"/>
         </shape>
     </item>
+
 </selector>
