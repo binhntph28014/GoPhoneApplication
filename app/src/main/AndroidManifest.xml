@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,11 +19,33 @@
         android:theme="@style/Theme.GoPhoneApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".view.voucher.VoucherScreen"
+            android:exported="false" />
+        <activity
+            android:name=".fragment.ShowAllProductByCategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.buy_product.PayActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.success_screen.OrderSuccessActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.profile_screen.OrderProductScreen"
+            android:exported="false" />
+        <activity
+            android:name=".view.product_screen.DetailProduct"
+            android:exported="false" />
+        <activity
+            android:name=".view.card.ChangePaymentMethodsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.card.CardActivity"
+            android:exported="false" />
         <activity
             android:name=".fragment.homescreen.MainActivity"
             android:exported="false" />
-
         <activity
             android:name=".view.login.Splash"
             android:exported="true">
