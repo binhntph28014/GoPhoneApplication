@@ -21,6 +21,10 @@
 
         <activity
             android:name=".fragment.homescreen.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".view.login.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
