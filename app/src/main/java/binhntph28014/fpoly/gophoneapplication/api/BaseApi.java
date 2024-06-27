@@ -21,7 +21,7 @@ import retrofit2.http.Path;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
-    String LOCALHOT = "192.168.1.5"; // đc cho socket
+    String LOCALHOT = "192.168.1.17"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT + ":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
