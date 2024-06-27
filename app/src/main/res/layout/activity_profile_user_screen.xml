@@ -22,7 +22,7 @@
             android:background="@drawable/custom_bg_shopping_cart_white"
             android:padding="5dp"
             android:src="@drawable/back"
-            app:tint="@color/orange" />
+            app:tint="@color/color_chudao" />
 
         <TextView
             android:layout_weight="1"

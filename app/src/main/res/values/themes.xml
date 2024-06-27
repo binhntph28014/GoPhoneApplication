@@ -20,7 +20,7 @@
 
     </style>
 
-    <style name="Theme.GeoTeachApplication" parent="Base.Theme.GeoTeachApplication" />
+    <style name="Theme.GophonehApplication" parent="Base.Theme.GoPhoneApplication" />
     <style name="Base.Theme.Yellow" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/color_chudao</item>
