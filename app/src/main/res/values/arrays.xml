@@ -1,0 +1,12 @@
+<!-- res/values/arrays.xml -->
+<resources>
+    <string-array name="ratings_array">
+
+        <item>All</item>
+        <item>5 Sao<img src="@drawable/star.png"/></item>
+        <item>4 Sao<img src="@drawable/star.png"/></item>
+        <item>3 Sao<img src="@drawable/star.png"/></item>
+        <item>2 Sao<img src="@drawable/star.png"/></item>
+        <item>1 Sao<img src="@drawable/star.png"/></item>
+    </string-array>
+</resources>
