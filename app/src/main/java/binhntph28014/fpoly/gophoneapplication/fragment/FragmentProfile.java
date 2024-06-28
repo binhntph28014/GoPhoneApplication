@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,7 +27,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
 import binhntph28014.fpoly.gophoneapplication.databinding.FragmentProfileBinding;
 import binhntph28014.fpoly.gophoneapplication.databinding.LayoutDialogLogoutBinding;

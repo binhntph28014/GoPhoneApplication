@@ -59,4 +59,39 @@ public class ApiUtil {
             }
         });
     }
+//    public static void setTitleQuantityCart(Context context, TextView tvQuantityCart) {
+//        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+//        BaseApi.API.allCartUser(token).enqueue(new Callback<CartReponse>() {
+//            @Override
+//            public void onResponse(Call<CartReponse> call, Response<CartReponse> response) {
+//                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+//                    CartReponse cartReponse = response.body();
+//                    Log.d(TAG.toString, "onResponse-allCartUser: " + cartReponse.toString());
+//                    if(cartReponse.getCode() == 200) {
+//                        CartUtil.listCart = cartReponse.getData();
+//                        tvQuantityCart.setText(CartUtil.listCart.size() + "");
+//                    }
+//                } else { // nhận các đầu status #200
+//                    try {
+//                        String errorBody = response.errorBody().string();
+//                        JSONObject errorJson = new JSONObject(errorBody);
+//                        String errorMessage = errorJson.getString("message");
+//                        Log.d(TAG.toString, "onResponse-allCartUser: " + errorMessage);
+//                        Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
+//                    }catch (IOException e){
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CartReponse> call, Throwable t) {
+//                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
+//                Log.d(TAG.toString, "onFailure-allCartUser: " + t.toString());
+//            }
+//        });
+//    }
+
 }

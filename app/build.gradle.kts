@@ -66,6 +66,7 @@ dependencies {
 
     implementation("com.google.ai.client.generativeai:generativeai:0.3.0")
 
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
     implementation("com.google.guava:guava:31.0.1-android")
 
     implementation ("com.google.android.gms:play-services-auth:20.4.1")
