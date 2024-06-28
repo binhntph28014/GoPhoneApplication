@@ -167,7 +167,7 @@ public class Login extends AppCompatActivity {
         return TextUtils.isEmpty(text1) || TextUtils.isEmpty(text2);
     }
 
-    // ----------------------- LOGIN GOOGLE ---------------------------- //
+    // ---------------------- LOGIN GOOGLE ---------------------------- //
 
     private void initLoginGoogle() {
         sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);

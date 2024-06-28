@@ -450,7 +450,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 //
 //        } else {
 //            Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
-//        }
+//        } //n
 
 
         }
