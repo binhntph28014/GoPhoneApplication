@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="#FCDD8D"
+        android:background="@color/color_chudao"
         android:paddingHorizontal="12dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -37,11 +37,11 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/iconfind"
+                        android:src="@drawable/timkiem"
                         android:layout_width="24dp"
                         android:layout_height="24dp"/>
 
-                    <EditText
+                    <TextView
                         android:gravity="center"
                         android:layout_gravity="center"
                         android:hint="Tìm kiếm..."
@@ -58,12 +58,12 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:id="@+id/imgCart"
-                    android:src="@drawable/icongiohang"
+                    android:src="@drawable/giohang"
                     android:background="@drawable/custom_bg_icon"
                     android:padding="7dp"
                     android:scaleType="centerCrop"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -85,15 +85,15 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <ImageView-->
-            <!--                android:id="@+id/imgChat"-->
-            <!--                android:layout_marginHorizontal="5dp"-->
-            <!--                android:src="@drawable/messg"-->
-            <!--                android:background="@drawable/custom_bg_icon"-->
-            <!--                android:padding="7dp"-->
-            <!--                android:scaleType="centerCrop"-->
-            <!--                android:layout_width="30dp"-->
-            <!--                android:layout_height="30dp"/>-->
+<!--            <ImageView-->
+<!--                android:id="@+id/imgChat"-->
+<!--                android:layout_marginHorizontal="5dp"-->
+<!--                android:src="@drawable/messg"-->
+<!--                android:background="@drawable/custom_bg_icon"-->
+<!--                android:padding="7dp"-->
+<!--                android:scaleType="centerCrop"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"/>-->
 
         </LinearLayout>
 

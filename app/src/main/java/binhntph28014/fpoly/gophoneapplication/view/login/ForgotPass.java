@@ -13,12 +13,11 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import binhntph28014.fpoly.gophoneapplication.untill.ProgressLoadingDialog;
 import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
 import binhntph28014.fpoly.gophoneapplication.databinding.ActivityForgotPassBinding;
 import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
-
+import binhntph28014.fpoly.gophoneapplication.untill.ProgressLoadingDialog;
 import binhntph28014.fpoly.gophoneapplication.untill.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;

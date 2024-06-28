@@ -36,8 +36,4 @@ public class DataToken {
         this.iat = iat;
     }
 }
-<<<<<<< HEAD
-=======
 
-//
->>>>>>> origin/Nhuong

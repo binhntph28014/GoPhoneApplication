@@ -1,4 +1,4 @@
-package binhntph28014.fpoly.gophoneapplication.model.response.store;
+package binhntph28014.fpoly.gophoneapplication.fragment.model.response.store;
 
 public class AccountId {
     private  String _id;
