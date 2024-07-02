@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import binhntph28014.fpoly.gophoneapplication.FindProduct;
 import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.adapter.ProductAdapter;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
@@ -35,7 +36,9 @@ import binhntph28014.fpoly.gophoneapplication.model.Product;
 import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
 import binhntph28014.fpoly.gophoneapplication.untill.AccountUltil;
+import binhntph28014.fpoly.gophoneapplication.untill.CartUtil;
 import binhntph28014.fpoly.gophoneapplication.untill.ObjectUtil;
+import binhntph28014.fpoly.gophoneapplication.view.cart.CartActivity;
 import binhntph28014.fpoly.gophoneapplication.view.product_screen.DetailProduct;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -47,8 +50,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
     private FragmentProductBinding binding;
-
-
     public FragmentProduct() {
     }
 
@@ -77,94 +78,9 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
         callApiBanner();
         callApiGetListAllProducts();
     }
-
-
-    private void callApiBanner() {
-        BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {
-            @Override
-            public void onResponse(Call<BannerReponse> call, Response<BannerReponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    BannerReponse reponse = response.body();
-                    Log.d("zzzz", "onResponse-getListBanner: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
-                        setDataBanner(reponse.getData());
-                    }
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d("zzzz", "onResponse-getListBanner: " + errorMessage);
-                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<BannerReponse> call, Throwable t) {
-                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-    private void setDataBanner(List<Banner> data) {
-        ArrayList<SlideModel> list  = new ArrayList<>();
-        List<String> tabTitles = new ArrayList<>();
-        for (Banner banner: data) {
-            list.add(new SlideModel(banner.getImage() , ScaleTypes.FIT));
-            tabTitles.add(banner.getNote());
-        }
-        binding.sliderProduct.setImageList(list, ScaleTypes.FIT);
-    }
-    private void initController() {
-//        binding.imgCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), CartActivity.class);
-//                startActivity(intent);
-//                getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
-//            }
-//        });
-//        binding.imgChat.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), ChatActivity.class);
-//                startActivity(intent);
-//                getActivity().overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_left);
-//            }
-//        });
-
-        TextWatcher textWatcher = new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() > 0){
-                    productAdapter.filterItem(s.toString());
-
-                }else {
-                    productAdapter.filterItem(s.toString());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-
-//        binding.find.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), FindProduct.class);
-//                startActivity(intent);
-//            }
-//        });
+    private void setNumberCart() {
+        // Lấy danh sách cart
+        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
     }
     private void initView() {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
@@ -174,6 +90,96 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
         productAdapter.setProductList(listProdcut);
         binding.recycleProduct.setAdapter(productAdapter);
     }
+//
+private void initController() {
+    binding.imgCart.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), CartActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        }
+    });
+//        binding.imgChat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), ChatActivity.class);
+//                startActivity(intent);
+//                getActivity().overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_left);
+//            }
+//        });
+
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0){
+                productAdapter.filterItem(s.toString());
+
+            }else {
+                productAdapter.filterItem(s.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    binding.find.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), FindProduct.class);
+            startActivity(intent);
+        }
+    });
+}
+//
+private void callApiBanner() {
+    BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {
+        @Override
+        public void onResponse(Call<BannerReponse> call, Response<BannerReponse> response) {
+            if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                BannerReponse reponse = response.body();
+                Log.d(TAG.toString, "onResponse-getListBanner: " + reponse.toString());
+                if(reponse.getCode() == 200) {
+                    setDataBanner(reponse.getData());
+                }
+            } else { // nhận các đầu status #200
+                try {
+                    String errorBody = response.errorBody().string();
+                    JSONObject errorJson = new JSONObject(errorBody);
+                    String errorMessage = errorJson.getString("message");
+                    Log.d(TAG.toString, "onResponse-getListBanner: " + errorMessage);
+                    Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                }catch (IOException e){
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<BannerReponse> call, Throwable t) {
+            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+    private void setDataBanner(List<Banner> data) {
+        ArrayList<SlideModel> list  = new ArrayList<>();
+        List<String> tabTitles = new ArrayList<>();
+        for (Banner banner: data) {
+            list.add(new SlideModel(banner.getImage() , ScaleTypes.FIT));
+            tabTitles.add(banner.getNote());
+        }
+        binding.sliderProduct.setImageList(list, ScaleTypes.FIT);
+    }
+    //
     public void callApiGetListAllProducts() {
         binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListAllProduct(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {

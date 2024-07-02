@@ -78,4 +78,3 @@ public interface BaseApi {
     Call<DetailProductResponse> getDetailProduct(@Path("idProduct") String idProduct);
 
 }
-//

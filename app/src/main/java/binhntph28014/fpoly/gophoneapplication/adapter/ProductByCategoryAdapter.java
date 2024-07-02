@@ -113,4 +113,3 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         notifyDataSetChanged();
     }
 }
-//

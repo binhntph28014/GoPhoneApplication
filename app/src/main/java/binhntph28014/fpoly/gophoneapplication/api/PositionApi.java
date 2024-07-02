@@ -18,4 +18,3 @@ public interface PositionApi {
             .create(PositionApi.class);
 
 }
-//
