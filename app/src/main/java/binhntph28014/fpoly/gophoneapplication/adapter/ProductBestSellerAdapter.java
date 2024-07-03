@@ -19,6 +19,7 @@ import java.util.List;
 
 import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
+import binhntph28014.fpoly.gophoneapplication.databinding.LayoutItemProductBestsellerBinding;
 import binhntph28014.fpoly.gophoneapplication.model.OptionProduct;
 import binhntph28014.fpoly.gophoneapplication.model.Product;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailProductResponse;
