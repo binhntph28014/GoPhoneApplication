@@ -4,9 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
+import binhntph28014.fpoly.gophoneapplication.model.body.PurchaseBody;
 import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.CartReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailUserReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.InfoResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductByCategoryReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
@@ -14,6 +17,8 @@ import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -76,5 +81,43 @@ public interface BaseApi {
 
     @GET("products/detail-product/{idProduct}")
     Call<DetailProductResponse> getDetailProduct(@Path("idProduct") String idProduct);
+//info
+@FormUrlEncoded
+@POST("info/add")
+Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
+                             @Field("name") String name,
+                             @Field("address") String address,
+                             @Field("phone_number") String phone_number,
+                             @Field("checked") Boolean checked);
+    @FormUrlEncoded
+    @PUT("info/edit-info/{idInfo}")
+    Call<ServerResponse> editInfo(@Header("Authorization") String authorization,
+                                  @Path("idInfo") String idInfo,
+                                  @Field("name") String name,
+                                  @Field("address") String address,
+                                  @Field("phone_number") String phone_number,
+                                  @Field("checked") Boolean checked);
 
+    @DELETE("info/delete/{idInfo}")
+    Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
+                                    @Path("idInfo") String idInfo);
+
+    @GET("info")
+    Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
+    @POST("order/create-order")
+    Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
+                                     @Body PurchaseBody purchaseBody);
+    @POST("order/create-order-by-zalo")
+    Call<ServerResponse> createOrderByZalo(@Header("Authorization") String authorization,
+                                           @Body PurchaseBody purchaseBody);
+    @DELETE("cart/delete-cart-item/{idCart}")
+    Call<ServerResponse> deleteCartItem(@Header("Authorization") String authorization,
+                                        @Path("idCart") String idCart);
+    @GET("cart/all-cart-user")
+    Call<CartReponse> allCartUser(@Header("Authorization") String authorization);
+    @FormUrlEncoded
+    @PUT("cart/update-quantity/{idCart}")
+    Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
+                                                @Path("idCart") String idCart,
+                                                @Field("quantity") int quantity);
 }

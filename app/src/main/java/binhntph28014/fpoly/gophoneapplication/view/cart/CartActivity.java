@@ -22,22 +22,22 @@ import java.text.DecimalFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import quyenvvph20946.fpl.geoteachapplication.R;
-import quyenvvph20946.fpl.geoteachapplication.adapter.CartAdapter;
-import quyenvvph20946.fpl.geoteachapplication.api.BaseApi;
-import quyenvvph20946.fpl.geoteachapplication.databinding.ActivityCartBinding;
-import quyenvvph20946.fpl.geoteachapplication.fragment.homescreen.MainActivity;
-import quyenvvph20946.fpl.geoteachapplication.model.OptionAndQuantity;
-import quyenvvph20946.fpl.geoteachapplication.model.response.ServerResponse;
-import quyenvvph20946.fpl.geoteachapplication.ultil.AccountUltil;
-import quyenvvph20946.fpl.geoteachapplication.ultil.ApiUtil;
-import quyenvvph20946.fpl.geoteachapplication.ultil.CartInterface;
-import quyenvvph20946.fpl.geoteachapplication.ultil.CartUtil;
-import quyenvvph20946.fpl.geoteachapplication.ultil.TAG;
-import quyenvvph20946.fpl.geoteachapplication.ultil.swipe.ItemTouchHelperListener;
-import quyenvvph20946.fpl.geoteachapplication.ultil.swipe.RecycleViewItemTouchHelper;
-import quyenvvph20946.fpl.geoteachapplication.view.buy_product.PayActivity;
-import quyenvvph20946.fpl.geoteachapplication.view.voucher.VoucherScreen;
+
+import binhntph28014.fpoly.gophoneapplication.PayActivity;
+import binhntph28014.fpoly.gophoneapplication.R;
+import binhntph28014.fpoly.gophoneapplication.adapter.CartAdapter;
+import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivityCartBinding;
+import binhntph28014.fpoly.gophoneapplication.fragment.homescreen.MainActivity;
+import binhntph28014.fpoly.gophoneapplication.model.OptionAndQuantity;
+import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
+import binhntph28014.fpoly.gophoneapplication.untill.AccountUltil;
+import binhntph28014.fpoly.gophoneapplication.untill.ApiUtil;
+import binhntph28014.fpoly.gophoneapplication.untill.CartInterface;
+import binhntph28014.fpoly.gophoneapplication.untill.CartUtil;
+import binhntph28014.fpoly.gophoneapplication.untill.TAG;
+import binhntph28014.fpoly.gophoneapplication.untill.swipe.ItemTouchHelperListener;
+import binhntph28014.fpoly.gophoneapplication.untill.swipe.RecycleViewItemTouchHelper;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,13 +76,13 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             }
         });
 
-        binding.listVoucher.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CartActivity.this, VoucherScreen.class);
-                startActivity(intent);
-            }
-        });
+//        binding.listVoucher.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(CartActivity.this, VoucherScreen.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
         binding.listThanhToan.setOnClickListener(new View.OnClickListener() {

@@ -11,7 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import quyenvvph20946.fpl.geoteachapplication.R;
+import binhntph28014.fpoly.gophoneapplication.R;
+
 
 public class ChangePaymentMethodsActivity extends AppCompatActivity {
     private AppCompatButton zalopay, payNormal;

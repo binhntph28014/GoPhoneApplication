@@ -23,8 +23,17 @@
             android:name=".fragment.homescreen.MainActivity"
             android:exported="false" />
 
+<!--        <activity-->
+<!--            android:name=".view.login.Splash"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
-            android:name=".view.login.Splash"
+            android:name=".AddressActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,6 +41,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.login.ResetPassSuccess"
             android:exported="false" />
@@ -53,6 +63,7 @@
         <activity
             android:name=".view.product_screen.DetailProduct"
             android:exported="false" />
+
     </application>
 
 </manifest>
