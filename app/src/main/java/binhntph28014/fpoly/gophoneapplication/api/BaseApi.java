@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
+import java.util.List;
+
 import binhntph28014.fpoly.gophoneapplication.model.body.PurchaseBody;
 import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.CartReponse;
@@ -14,6 +16,7 @@ import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductByCategoryReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.YeuthichRequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -120,4 +123,6 @@ Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
     Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
                                                 @Path("idCart") String idCart,
                                                 @Field("quantity") int quantity);
+    @GET("/api/yeuthich/checktheoiduser/{user_id}")
+    Call<List<YeuthichRequestBody>> getFavorites(@Path("user_id") String userId);
 }
