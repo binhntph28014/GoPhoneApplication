@@ -28,3 +28,6 @@ public class ProductDetailsSoldQuantity {
         this.image = image;
     }
 }
+
+
+//nh
