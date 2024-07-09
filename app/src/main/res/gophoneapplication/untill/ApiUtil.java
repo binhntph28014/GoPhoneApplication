@@ -2,14 +2,12 @@ package binhntph28014.fpoly.gophoneapplication.untill;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-
 
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailUserReponse;

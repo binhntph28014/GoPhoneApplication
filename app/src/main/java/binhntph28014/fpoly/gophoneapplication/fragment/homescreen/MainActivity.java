@@ -6,12 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 import binhntph28014.fpoly.gophoneapplication.R;
-
-
 import binhntph28014.fpoly.gophoneapplication.databinding.ActivityMainBinding;
 import binhntph28014.fpoly.gophoneapplication.fragment.FragmentHome;
 import binhntph28014.fpoly.gophoneapplication.fragment.FragmentNotification;
