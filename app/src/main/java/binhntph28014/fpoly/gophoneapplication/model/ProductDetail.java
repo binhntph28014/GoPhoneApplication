@@ -289,3 +289,6 @@ public class ProductDetail implements Serializable {
         this.rom = rom;
     }
 }
+
+
+//nh

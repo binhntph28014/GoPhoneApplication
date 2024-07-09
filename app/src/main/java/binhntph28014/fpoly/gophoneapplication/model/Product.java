@@ -130,3 +130,6 @@ public class Product implements Serializable {
         this.soldQuantity = soldQuantity;
     }
 }
+
+
+//nh

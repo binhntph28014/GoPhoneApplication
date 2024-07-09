@@ -216,3 +216,5 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
         getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }
+
+//nh
