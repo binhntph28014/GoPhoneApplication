@@ -17,6 +17,7 @@ import binhntph28014.fpoly.gophoneapplication.model.response.ProductByCategoryRe
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.YeuthichRequestBody;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -26,8 +27,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -107,6 +110,17 @@ Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
 
     @GET("info")
     Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
+    @FormUrlEncoded
+    @PUT("user/edit-profile/{idUser}")
+    Call<ServerResponse> editProfile(@Header("Authorization") String authorization,
+                                     @Path("idUser") String idUser,
+                                     @Field("username") String username,
+                                     @Field("birthday") String birthday);
+    @Multipart
+    @PUT("user/upload-avatar/{idUser}")
+    Call<ServerResponse> uploadAvatar(@Header("Authorization") String authorization,
+                                      @Path("idUser") String idUser,
+                                      @Part MultipartBody.Part avatar);
     @POST("order/create-order")
     Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
                                      @Body PurchaseBody purchaseBody);

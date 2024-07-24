@@ -2,18 +2,9 @@ package binhntph28014.fpoly.gophoneapplication.view.product_screen;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -22,14 +13,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,7 +26,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 import binhntph28014.fpoly.gophoneapplication.R;
@@ -50,7 +37,6 @@ import binhntph28014.fpoly.gophoneapplication.model.OptionProduct;
 import binhntph28014.fpoly.gophoneapplication.model.Product;
 import binhntph28014.fpoly.gophoneapplication.model.ProductDetail;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailProductResponse;
-import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
 import binhntph28014.fpoly.gophoneapplication.untill.ObjectUtil;
 import binhntph28014.fpoly.gophoneapplication.untill.ProgressLoadingDialog;
 import binhntph28014.fpoly.gophoneapplication.untill.TAG;
