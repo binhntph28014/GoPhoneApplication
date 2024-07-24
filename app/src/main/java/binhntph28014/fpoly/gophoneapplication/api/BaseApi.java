@@ -139,4 +139,19 @@ Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
                                                 @Field("quantity") int quantity);
     @GET("/api/yeuthich/checktheoiduser/{user_id}")
     Call<List<YeuthichRequestBody>> getFavorites(@Path("user_id") String userId);
+
+    @GET("review/{productId}")
+    Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
+                                             @Path("productId") String productId);
+    @FormUrlEncoded
+    @POST("review/create-review/{productId}")
+    Call<ServerResponse> createComment(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("product_id") String product_id,
+                                       @Field("order_id") String orderId,
+
+                                       @Field("user_id") String user_id,
+                                       @Field("content") String content,
+                                       @Field("name") String name,
+                                       @Field("rate") int rate);
 }
