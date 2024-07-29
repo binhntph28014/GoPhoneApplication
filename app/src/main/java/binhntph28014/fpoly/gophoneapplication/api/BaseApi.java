@@ -12,6 +12,7 @@ import binhntph28014.fpoly.gophoneapplication.model.response.CartReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailUserReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.InfoResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ListCommentResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductByCategoryReponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
@@ -154,4 +155,17 @@ Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
                                        @Field("content") String content,
                                        @Field("name") String name,
                                        @Field("rate") int rate);
+    @GET("products/similar-product/{idProduct}")
+    Call<ProductResponse> getDataSimilarlProduct(@Path("idProduct") String idProduct);
+    @FormUrlEncoded
+    @POST("cart/create-cart-item")
+    Call<ServerResponse> createCartItem(@Header("Authorization") String authorization,
+                                        @Field("option_id") String optionId,
+                                        @Field("quantity") int quantity);
+//yeu thich
+    @POST("/api/yeuthich/themyeuthich")
+    Call<Void> addFavorite(@Body YeuthichRequestBody requestBody);
+    @POST("/api/yeuthich/deletefavorite")
+    Call<Void> removeFavorite(@Body YeuthichRequestBody yeuthich);
+
 }
