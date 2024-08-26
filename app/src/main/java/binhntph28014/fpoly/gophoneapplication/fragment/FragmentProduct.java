@@ -1,70 +1,225 @@
 package binhntph28014.fpoly.gophoneapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import binhntph28014.fpoly.gophoneapplication.FindProduct;
 import binhntph28014.fpoly.gophoneapplication.R;
+import binhntph28014.fpoly.gophoneapplication.adapter.ProductAdapter;
+import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
+import binhntph28014.fpoly.gophoneapplication.databinding.FragmentProductBinding;
+import binhntph28014.fpoly.gophoneapplication.model.Banner;
+import binhntph28014.fpoly.gophoneapplication.model.Product;
+import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
+import binhntph28014.fpoly.gophoneapplication.untill.AccountUltil;
+import binhntph28014.fpoly.gophoneapplication.untill.CartUtil;
+import binhntph28014.fpoly.gophoneapplication.untill.ObjectUtil;
+import binhntph28014.fpoly.gophoneapplication.untill.TAG;
+import binhntph28014.fpoly.gophoneapplication.view.cart.CartActivity;
+import binhntph28014.fpoly.gophoneapplication.view.product_screen.DetailProduct;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentProduct#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentProduct extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class FragmentProduct extends Fragment implements ObjectUtil {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private List<Product> listProdcut;
+    private ProductAdapter productAdapter;
+    private FragmentProductBinding binding;
     public FragmentProduct() {
-        // Required empty public constructor
     }
+
     public static FragmentProduct newInstance() {
         FragmentProduct fragment = new FragmentProduct();
-        return fragment;
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentProduct.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentProduct newInstance(String param1, String param2) {
-        FragmentProduct fragment = new FragmentProduct();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false);
+        binding = FragmentProductBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView();
+        initController();
+        callApiBanner();
+        callApiGetListAllProducts();
+    }
+    private void setNumberCart() {
+        // Lấy danh sách cart
+        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
+    }
+    private void initView() {
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+        binding.recycleProduct.setLayoutManager(layoutManager);
+        listProdcut = new ArrayList<>();
+        productAdapter = new ProductAdapter(getContext(), listProdcut, this);
+        productAdapter.setProductList(listProdcut);
+        binding.recycleProduct.setAdapter(productAdapter);
+    }
+//
+private void initController() {
+    binding.imgCart.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), CartActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
+        }
+    });
+//        binding.imgChat.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), ChatActivity.class);
+//                startActivity(intent);
+//                getActivity().overridePendingTransition(R.anim.slide_out_left, R.anim.slide_out_left);
+//            }
+//        });
+
+    TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s.length() > 0){
+                productAdapter.filterItem(s.toString());
+
+            }else {
+                productAdapter.filterItem(s.toString());
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    binding.find.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), FindProduct.class);
+            startActivity(intent);
+        }
+    });
+}
+//
+private void callApiBanner() {
+    BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {
+        @Override
+        public void onResponse(Call<BannerReponse> call, Response<BannerReponse> response) {
+            if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                BannerReponse reponse = response.body();
+                Log.d(TAG.toString, "onResponse-getListBanner: " + reponse.toString());
+                if(reponse.getCode() == 200) {
+                    setDataBanner(reponse.getData());
+                }
+            } else { // nhận các đầu status #200
+                try {
+                    String errorBody = response.errorBody().string();
+                    JSONObject errorJson = new JSONObject(errorBody);
+                    String errorMessage = errorJson.getString("message");
+                    Log.d(TAG.toString, "onResponse-getListBanner: " + errorMessage);
+                    Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                }catch (IOException e){
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        @Override
+        public void onFailure(Call<BannerReponse> call, Throwable t) {
+            Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+        }
+    });
+}
+    private void setDataBanner(List<Banner> data) {
+        ArrayList<SlideModel> list  = new ArrayList<>();
+        List<String> tabTitles = new ArrayList<>();
+        for (Banner banner: data) {
+            list.add(new SlideModel(banner.getImage() , ScaleTypes.FIT));
+            tabTitles.add(banner.getNote());
+        }
+        binding.sliderProduct.setImageList(list, ScaleTypes.FIT);
+    }
+    //
+    public void callApiGetListAllProducts() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        BaseApi.API.getListAllProduct(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                if (response.isSuccessful()) {
+                    ProductResponse productResponse = response.body();
+                    productAdapter.setProductList(productResponse.getResult());
+                    binding.recycleProduct.setAdapter(productAdapter);
+                } else {
+                    Toast.makeText(getActivity(), "call list all products err", Toast.LENGTH_SHORT).show();
+                }
+                binding.progressBar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+                Log.d("checkbuggg", "onFailure: "+t);
+                binding.progressBar.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        String averageRate = String.valueOf(product.getAverageRate());
+        String sellproduct = String.valueOf(product.getSoldQuantity());
+        String reviewcount = String.valueOf(product.getReviewCount());
+        Double minPrice = (product.getMinPrice());
+        Intent intent = new Intent(getActivity(), DetailProduct.class);
+        intent.putExtra("id_product", id);
+        intent.putExtra("sold_quantity",sellproduct);
+        intent.putExtra("rating_start",averageRate);
+        intent.putExtra("review_count",reviewcount);
+        intent.putExtra("minPrice",minPrice);
+        Log.d("rating_start", "onclickObject: "+averageRate);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_left);
     }
 }

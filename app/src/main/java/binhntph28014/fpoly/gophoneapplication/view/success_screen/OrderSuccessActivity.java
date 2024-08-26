@@ -1,26 +1,37 @@
 package binhntph28014.fpoly.gophoneapplication.view.success_screen;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import binhntph28014.fpoly.gophoneapplication.R;
+import binhntph28014.fpoly.gophoneapplication.databinding.ActivityOrderSuccessMainBinding;
+import binhntph28014.fpoly.gophoneapplication.fragment.homescreen.MainActivity;
+
 
 public class OrderSuccessActivity extends AppCompatActivity {
-
+    ActivityOrderSuccessMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_order_success_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        binding = ActivityOrderSuccessMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        initView();
+        initController();
+    }
+    private void initController() {
+        binding.btnSuccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrderSuccessActivity.this, MainActivity.class);
+                startActivity(intent);
+                finishAffinity();
+            }
         });
+    }
+
+    private void initView() {
     }
 }

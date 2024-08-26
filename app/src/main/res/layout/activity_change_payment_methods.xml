@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-   >
+    tools:context=".view.cart.ChangePaymentMethodsActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_pay"
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20px"
-        android:background="@color/color_chudao"
+        android:background="#0068FF"
         android:text="Thanh toán qua ví ZaloPay"
         android:textColor="@color/white"/>
 </LinearLayout>

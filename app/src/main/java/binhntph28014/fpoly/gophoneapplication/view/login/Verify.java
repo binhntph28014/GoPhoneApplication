@@ -13,7 +13,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
 import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
 import binhntph28014.fpoly.gophoneapplication.databinding.ActivityVerifyBinding;

@@ -18,6 +18,7 @@
             android:id="@+id/imgBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:background="@drawable/custom_bg_shopping_cart_primary"
             android:padding="5dp"
             android:src="@drawable/back"
             app:tint="@color/white" />
@@ -25,7 +26,6 @@
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
             android:text="Thanh toán"
             android:textSize="25dp"
             />
@@ -97,15 +97,18 @@
                 android:layout_marginTop="5dp"
                 android:padding="10dp">
 
-
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shop" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#15753C"
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
-                    android:text="Danh sách sản phẩm mua"
+                    android:text="Geotech Store"
                     android:textSize="17dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -145,7 +148,6 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:text="Voucher"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imageVoucher"/>
@@ -155,7 +157,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Miễn phí vận chuyển"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/image_arrow_1"
@@ -201,7 +202,6 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:text="Phương Thức"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/image_cash"
@@ -213,7 +213,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Thanh Toán Khi Nhận Hàng"
-                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/image_arrow"
@@ -235,14 +234,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!--            <Button-->
-            <!--                android:id="@+id/btnMomo"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="Thanh toán bằng MOMO"-->
-            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                app:layout_constraintStart_toStartOf="parent" />-->
+<!--            <Button-->
+<!--                android:id="@+id/btnMomo"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Thanh toán bằng MOMO"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent" />-->
         </LinearLayout>
 
 
@@ -264,7 +263,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:text="Tổng thanh toán:"
-            android:textStyle="bold"
             android:layout_toStartOf="@+id/tvTotalPrice"
             android:layout_centerInParent="true"
             android:textColor="@color/black" />

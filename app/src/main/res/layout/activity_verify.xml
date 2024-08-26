@@ -6,9 +6,7 @@
     android:orientation="vertical"
     android:paddingHorizontal="22dp"
     android:layout_height="match_parent"
-    tools:ignore="MissingClass"
-    android:background="#4DFFA500"
-    >
+    tools:ignore="MissingClass">
 
     <ImageView
         android:id="@+id/backVerify"
@@ -26,7 +24,7 @@
         android:layout_marginTop="50dp"
         android:text="Mã Xác Minh"
         android:textSize="@dimen/font_size_text_title"
-        android:textColor="@color/color_chudao"
+        android:textColor="#1B1A19"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -14,7 +14,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-
 import binhntph28014.fpoly.gophoneapplication.R;
 import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
 import binhntph28014.fpoly.gophoneapplication.databinding.ActivityRegisterBinding;
@@ -60,7 +59,7 @@ public class Register extends AppCompatActivity {
         binding.tvDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Register.this,Login.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_right,R.anim.slide_out_right);
             }

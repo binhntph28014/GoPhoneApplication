@@ -420,7 +420,8 @@
             android:text="Thêm vào giỏ hàng"
             android:background="@drawable/custom_btn_no"
             app:backgroundTint="@null"
-            android:textColor="@color/white"/>
+            android:textColor="@color/red"/>
+
 
         <!--        <Button-->
         <!--            android:id="@+id/btnBuyDetail"-->

@@ -1,53 +1,55 @@
 package binhntph28014.fpoly.gophoneapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import binhntph28014.fpoly.gophoneapplication.R;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentHome#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import binhntph28014.fpoly.gophoneapplication.adapter.ViewPagerHomeAdapter;
+import binhntph28014.fpoly.gophoneapplication.api.BaseApi;
+import binhntph28014.fpoly.gophoneapplication.databinding.FragmentHomeBinding;
+import binhntph28014.fpoly.gophoneapplication.model.Banner;
+import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
+import binhntph28014.fpoly.gophoneapplication.untill.TAG;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class FragmentHome extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private FragmentHomeBinding binding;
+    private ViewPagerHomeAdapter viewPagerHomeAdapter;
 
     public FragmentHome() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentHome.
-     */
     // TODO: Rename and change types and number of parameters
-    public static FragmentHome newInstance(String param1, String param2) {
-        FragmentHome fragment = new FragmentHome();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public static FragmentHome newInstance() {
         FragmentHome fragment = new FragmentHome();
         return fragment;
@@ -56,16 +58,112 @@ public class FragmentHome extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater,container,false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        setTab();
+        initView();
+        callApiBanner();
+    }
+
+    private void callApiBanner() {
+        BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {
+            @Override
+            public void onResponse(Call<BannerReponse> call, Response<BannerReponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    BannerReponse reponse = response.body();
+                    Log.d(TAG.toString, "onResponse-getListBanner: " + reponse.toString());
+                    if(reponse.getCode() == 200) {
+                        setDataBanner(reponse.getData());
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-getListBanner: " + errorMessage);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BannerReponse> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setDataBanner(List<Banner> data) {
+        ArrayList<SlideModel> list  = new ArrayList<>();
+
+        for (Banner banner: data) {
+            list.add(new SlideModel(banner.getImage() , ScaleTypes.FIT));
+
+        }
+        binding.sliderHome.setImageList(list, ScaleTypes.FIT);
+    }
+
+    private void setTab() {
+        viewPagerHomeAdapter = new ViewPagerHomeAdapter(getActivity());
+        binding.viewPagerHome.setAdapter(viewPagerHomeAdapter);
+
+        TabLayoutMediator mediator = new TabLayoutMediator(binding.tabHome, binding.viewPagerHome, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position) {
+                    case 0:
+                        tab.setText("Sản phẩm");
+                        break;
+                    case 1:
+                        tab.setText("Giảm giá");
+                        break;
+                    case 2:
+                        tab.setText("Bán chạy");
+                        break;
+                    default:
+                        tab.setText("Liên quan");
+                }
+            }
+        });
+        mediator.attach();
+    }
+    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == getActivity().RESULT_OK) {
+                        Intent intent = result.getData();
+                        int cartSize = intent.getIntExtra("data_cart_size", 0);
+                        binding.tvQuantityCart.setText(cartSize + "");
+                    }
+                }
+            });
+
+    private void initView() {
+    }
+
+    private void setTabTitles(List<String> tabTitles) {
+        for (int i = 0; i < tabTitles.size(); i++) {
+            TabLayout.Tab tab = binding.tabHome.getTabAt(i);
+            if (tab != null) {
+                tab.setText(tabTitles.get(i));
+            }
+        }
     }
 }
