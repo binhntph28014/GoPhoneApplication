@@ -43,5 +43,3 @@ public class ProductResponse {
         this.result = result;
     }
 }
-
-//nh

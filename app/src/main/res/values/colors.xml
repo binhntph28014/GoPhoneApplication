@@ -2,9 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">#0CC0DF</color>
+    <color name="primary">#08E446</color>
     <color name="primary_blur">#C7F1F8</color>
-    <color name="primary_click">#9BE7F3</color>
+    <color name="primary_click">#78D674</color>
     <color name="gray69">#B0B0B0</color>
     <color name="gray99">#7A7A7A</color>
     <color name="gray">#E6E6E6</color>
@@ -17,5 +17,7 @@
     <color name="blue">#4285F4</color>
     <color name="color_chudao">#0CC0DF</color>
     <color name="color_edittext">#F6F6F6</color>
-    <color name="orange">#DF890A</color>
+    <color name="orange">#FF5722</color>
+    <color name="orange_click">#EC7955</color>
+
 </resources>

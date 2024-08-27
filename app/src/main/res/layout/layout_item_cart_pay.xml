@@ -56,8 +56,4 @@
                 android:text="Số lượng : x1" />
         </RelativeLayout>
     </LinearLayout>
-
-
-
-
 </LinearLayout>

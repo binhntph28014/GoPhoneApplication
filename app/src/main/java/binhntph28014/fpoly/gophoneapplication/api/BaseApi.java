@@ -4,19 +4,36 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 
+import java.util.List;
+
+import binhntph28014.fpoly.gophoneapplication.model.body.PurchaseBody;
+import binhntph28014.fpoly.gophoneapplication.model.response.BannerReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.CartReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.DetailProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.DetailUserReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.InfoResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ListCommentResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.LoginResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ProductByCategoryReponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.ProductResponse;
 import binhntph28014.fpoly.gophoneapplication.model.response.ServerResponse;
+import binhntph28014.fpoly.gophoneapplication.model.response.YeuthichRequestBody;
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface BaseApi {
@@ -62,6 +79,93 @@ public interface BaseApi {
     @GET("user/detail-profile/{idUser}")
     Call<DetailUserReponse> detailProfile(@Header("Authorization") String authorization,
                                           @Path("idUser") String idUser);
+    @GET("products/all-product")
+    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive, @Query("token") String token);
+    @GET("products/all-product-by-category")
+    Call<ProductByCategoryReponse> getListProductByCategory(@Query("token") String token);
+    @GET("banner/get-list")
+    Call<BannerReponse> getListBanner();
 
+    @GET("products/detail-product/{idProduct}")
+    Call<DetailProductResponse> getDetailProduct(@Path("idProduct") String idProduct);
+//info
+@FormUrlEncoded
+@POST("info/add")
+Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
+                             @Field("name") String name,
+                             @Field("address") String address,
+                             @Field("phone_number") String phone_number,
+                             @Field("checked") Boolean checked);
+    @FormUrlEncoded
+    @PUT("info/edit-info/{idInfo}")
+    Call<ServerResponse> editInfo(@Header("Authorization") String authorization,
+                                  @Path("idInfo") String idInfo,
+                                  @Field("name") String name,
+                                  @Field("address") String address,
+                                  @Field("phone_number") String phone_number,
+                                  @Field("checked") Boolean checked);
+
+    @DELETE("info/delete/{idInfo}")
+    Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
+                                    @Path("idInfo") String idInfo);
+
+    @GET("info")
+    Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
+    @FormUrlEncoded
+    @PUT("user/edit-profile/{idUser}")
+    Call<ServerResponse> editProfile(@Header("Authorization") String authorization,
+                                     @Path("idUser") String idUser,
+                                     @Field("username") String username,
+                                     @Field("birthday") String birthday);
+    @Multipart
+    @PUT("user/upload-avatar/{idUser}")
+    Call<ServerResponse> uploadAvatar(@Header("Authorization") String authorization,
+                                      @Path("idUser") String idUser,
+                                      @Part MultipartBody.Part avatar);
+    @POST("order/create-order")
+    Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
+                                     @Body PurchaseBody purchaseBody);
+    @POST("order/create-order-by-zalo")
+    Call<ServerResponse> createOrderByZalo(@Header("Authorization") String authorization,
+                                           @Body PurchaseBody purchaseBody);
+    @DELETE("cart/delete-cart-item/{idCart}")
+    Call<ServerResponse> deleteCartItem(@Header("Authorization") String authorization,
+                                        @Path("idCart") String idCart);
+    @GET("cart/all-cart-user")
+    Call<CartReponse> allCartUser(@Header("Authorization") String authorization);
+    @FormUrlEncoded
+    @PUT("cart/update-quantity/{idCart}")
+    Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
+                                                @Path("idCart") String idCart,
+                                                @Field("quantity") int quantity);
+    @GET("/api/yeuthich/checktheoiduser/{user_id}")
+    Call<List<YeuthichRequestBody>> getFavorites(@Path("user_id") String userId);
+
+    @GET("review/{productId}")
+    Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
+                                             @Path("productId") String productId);
+    @FormUrlEncoded
+    @POST("review/create-review/{productId}")
+    Call<ServerResponse> createComment(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("product_id") String product_id,
+                                       @Field("order_id") String orderId,
+
+                                       @Field("user_id") String user_id,
+                                       @Field("content") String content,
+                                       @Field("name") String name,
+                                       @Field("rate") int rate);
+    @GET("products/similar-product/{idProduct}")
+    Call<ProductResponse> getDataSimilarlProduct(@Path("idProduct") String idProduct);
+    @FormUrlEncoded
+    @POST("cart/create-cart-item")
+    Call<ServerResponse> createCartItem(@Header("Authorization") String authorization,
+                                        @Field("option_id") String optionId,
+                                        @Field("quantity") int quantity);
+//yeu thich
+    @POST("/api/yeuthich/themyeuthich")
+    Call<Void> addFavorite(@Body YeuthichRequestBody requestBody);
+    @POST("/api/yeuthich/deletefavorite")
+    Call<Void> removeFavorite(@Body YeuthichRequestBody yeuthich);
 
 }

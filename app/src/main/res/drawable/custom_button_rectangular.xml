@@ -2,13 +2,13 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="#19C472" />
+            <solid android:color="@color/primary" />
             <stroke android:dashGap="10dp"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="#6CC1CF" />
+            <solid android:color="@color/primary_click" />
             <stroke android:dashGap="10dp"/>
         </shape>
     </item>

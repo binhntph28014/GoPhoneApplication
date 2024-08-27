@@ -119,4 +119,3 @@ public class ForgotPass extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
     }
 }
-//nh

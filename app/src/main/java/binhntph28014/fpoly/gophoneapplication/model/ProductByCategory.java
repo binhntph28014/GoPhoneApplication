@@ -54,6 +54,3 @@ public class ProductByCategory implements Serializable {
         this.product = product;
     }
 }
-
-
-//nh

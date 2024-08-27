@@ -53,5 +53,3 @@ public class ProductByCategoryReponse {
         this.result = result;
     }
 }
-
-//nh
